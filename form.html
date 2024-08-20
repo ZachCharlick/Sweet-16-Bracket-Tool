@@ -14,7 +14,7 @@
         /* Form Styles */
         form {
             font-size: 1.5em;
-            width: 97%; /* Adjust the width of the form */
+            width: 100%; /* Adjust the width of the form */
             max-width: 1200px; /* Optional: limit the maximum width */
             margin: 20px auto; /* Center the form horizontally */
             padding: 20px;
@@ -45,7 +45,8 @@
             display: block;
             width: 100%;
             padding: 10px;
-            background-color: #28a745;
+            background-color: #00539B;
+            font-size: 30;
             color: white;
             border: none;
             border-radius: 5px;
@@ -146,14 +147,21 @@
                 display: block;
             }
             tbody td{
-                font-size: 25px;
+                font-size: 20px;
+            }
+
+            tbody td:nth-child(1)::after {
+                content: " Seed";
+                text-align: center;
+                background-color: #00539B;
+                color: white;
             }
 
             tbody td:nth-child(2)::before {
                 content: "East";
                 display: block;
                 margin-bottom: 0.1em; /* Adds space below the label */
-                font-size: 20px;
+                font-size: 17px;
                 font-weight: bold;
             }
 
@@ -161,7 +169,7 @@
                 content: "Midwest";
                 display: block;
                 margin-bottom: 0.1em; /* Adds space below the label */
-                font-size: 20px;
+                font-size: 17px;
                 font-weight: bold;
             }
 
@@ -169,7 +177,7 @@
                 content: "South";
                 display: block;
                 margin-bottom: 0.1em; /* Adds space below the label */
-                font-size: 20px;
+                font-size: 17px;
                 font-weight: bold;
             }
 
@@ -177,7 +185,7 @@
                 content: "West";
                 display: block;
                 margin-bottom: 0.1em; /* Adds space below the label */
-                font-size: 20px;
+                font-size: 17px;
                 font-weight: bold;
             }
 
