@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Basic Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Form Styles */
+        form {
+            font-size: 1.5em;
+            width: 97%; /* Adjust the width of the form */
+            max-width: 1200px; /* Optional: limit the maximum width */
+            margin: 20px auto; /* Center the form horizontally */
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        form input[type="text"],
+        form input[type="email"],
+        form input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        form input[type="submit"] {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 1.5em;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        table tr:hover {
+            background-color: #ddd;
+        }
+
+        table th {
+            background-color: #00539B;
+            color: white;
+        }
+
+        table td, table th {
+            text-align: left;
+            vertical-align: middle; /* Vertically center text */
+            padding: 8px;
+        }
+
+        /* Left-align radio buttons */
+        td input[type="radio"] {
+            margin-right: 10px; /* Adjust this value to increase/decrease the spacing */
+            margin-left: 0; /* Ensures no extra space on the left */
+        }
+  
+        /* Custom radio button styling */
+        input[type="radio"] {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-color: #fff;
+            border: 2px solid #007bff;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        input[type="radio"]:checked {
+            background-color: #007bff;
+        }
+
+        input[type="radio"]::after {
+            content: '';
+            display: block;
+            border-radius: 50%;
+            width: 12px;
+            height: 12px;
+            background-color: #fff;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            transition: transform 0.1s ease-in-out;
+        }
+
+        input[type="radio"]:checked::after {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        /* General table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+
+        /* Mobile-specific styling */
+        @media only screen and (max-width: 600px) {
+            table,
+            tbody,
+            th,
+            td,
+            tr {
+                display: block;
+            }
+            tbody td{
+                font-size: 25px;
+            }
+
+            tbody td:nth-child(2)::before {
+                content: "East";
+                display: block;
+                margin-bottom: 0.1em; /* Adds space below the label */
+                font-size: 20px;
+                font-weight: bold;
+            }
+
+            tbody td:nth-child(3)::before {
+                content: "Midwest";
+                display: block;
+                margin-bottom: 0.1em; /* Adds space below the label */
+                font-size: 20px;
+                font-weight: bold;
+            }
+
+            tbody td:nth-child(4)::before {
+                content: "South";
+                display: block;
+                margin-bottom: 0.1em; /* Adds space below the label */
+                font-size: 20px;
+                font-weight: bold;
+            }
+
+            tbody td:nth-child(5)::before {
+                content: "West";
+                display: block;
+                margin-bottom: 0.1em; /* Adds space below the label */
+                font-size: 20px;
+                font-weight: bold;
+            }
+
+            /* Hide the original table headers */
+            thead {
+                display: none;
+            }
+
+            tbody tr {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: auto 1fr;
+                margin-bottom: 1em;
+            }
+
+            #label {
+                grid-column: 1 / -1;
+                text-align: center;
+                background-color: #00539B;
+                color: white;
+            }
+
+            
+        }
+    </style>
+</head>
+
+<body>
+
+    <form id="submissionForm" action="https://docs.google.com/forms/d/e/1FAIpQLSfQHVwWja8V3FCtn6RIp3kUATLUuSfZd4G7UfxvEHvdZ5F5zQ/formResponse" method="post" onsubmit="return validateForm()">
+    <div class="error" id="errorMessage"></div>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="entry.587115681"><br>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="entry.778193387"><br>
+    <label for="phone">Phone:</label>
+    <input type="tel" id="phone" name="entry.932141564"><br>
+    
+
+    <table id="teamsTable">
+        <thead>
+            <tr>
+                <th>Seed</th>
+                <th>East</th>
+                <th>Midwest</th>
+                <th>South</th>
+                <th>West</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td id="label">#1</td>
+                <td><input type="radio" name="entry.1286033299" value="1East" data-region="East" data-seed="1" required> 1East</td>
+                <td><input type="radio" name="entry.1286033299" value="1Midwest" data-region="Midwest" data-seed="1"> 1Midwest</td>
+                <td><input type="radio" name="entry.1286033299" value="1South" data-region="South" data-seed="1"> 1South</td>
+                <td><input type="radio" name="entry.1286033299" value="1West" data-region="West" data-seed="1"> 1West</td>
+            </tr>
+            <tr>
+                <td id="label">#2</td>
+                <td><input type="radio" name="entry.829866371" value="1East" data-region="East" data-seed="2" required> 1East</td>
+                <td><input type="radio" name="entry.829866371" value="1Midwest" data-region="Midwest" data-seed="2"> 1Midwest</td>
+                <td><input type="radio" name="entry.829866371" value="1South" data-region="South" data-seed="2"> 1South</td>
+                <td><input type="radio" name="entry.829866371" value="1West" data-region="West" data-seed="2"> 1West</td>
+            </tr>
+            <tr>
+                <td id="label">#3</td>
+                <td><input type="radio" name="entry.906379987" value="1East" data-region="East" data-seed="3" required> 1East</td>
+                <td><input type="radio" name="entry.906379987" value="1Midwest" data-region="Midwest" data-seed="3"> 1Midwest</td>
+                <td><input type="radio" name="entry.906379987" value="1South" data-region="South" data-seed="3"> 1South</td>
+                <td><input type="radio" name="entry.906379987" value="1West" data-region="West" data-seed="3"> 1West</td>
+            </tr>
+            <tr>
+                <td id="label">#4</td>
+                <td><input type="radio" name="entry.380142485" value="1East" data-region="East" data-seed="4" required> 1East</td>
+                <td><input type="radio" name="entry.380142485" value="1Midwest" data-region="Midwest" data-seed="4"> 1Midwest</td>
+                <td><input type="radio" name="entry.380142485" value="1South" data-region="South" data-seed="4"> 1South</td>
+                <td><input type="radio" name="entry.380142485" value="1West" data-region="West" data-seed="4"> 1West</td>
+            </tr>
+            <tr>
+                <td id="label">#5</td>
+                <td><input type="radio" name="entry.963490472" value="1East" data-region="East" data-seed="5" required> 1East</td>
+                <td><input type="radio" name="entry.963490472" value="1Midwest" data-region="Midwest" data-seed="5"> 1Midwest</td>
+                <td><input type="radio" name="entry.963490472" value="1South" data-region="South" data-seed="5"> 1South</td>
+                <td><input type="radio" name="entry.963490472" value="1West" data-region="West" data-seed="5"> 1West</td>
+            </tr>
+            <tr>
+                <td id="label">#6</td>
+                <td><input type="radio" name="entry.280870750" value="1East" data-region="East" data-seed="6" required> 1East</td>
+                <td><input type="radio" name="entry.280870750" value="1Midwest" data-region="Midwest" data-seed="6"> 1Midwest</td>
+                <td><input type="radio" name="entry.280870750" value="1South" data-region="South" data-seed="6"> 1South</td>
+                <td><input type="radio" name="entry.280870750" value="1West" data-region="West" data-seed="6"> 1West</td>
+            </tr>
+            <tr>
+                <td id="label">#7</td>
+                <td><input type="radio" name="entry.548839611" value="1East" data-region="East" data-seed="7" required> 1East</td>
+                <td><input type="radio" name="entry.548839611" value="1Midwest" data-region="Midwest" data-seed="7"> 1Midwest</td>
+                <td><input type="radio" name="entry.548839611" value="1South" data-region="South" data-seed="7"> 1South</td>
+                <td><input type="radio" name="entry.548839611" value="1West" data-region="West" data-seed="7"> 1West</td>
+            </tr>
+            <tr>
+                <td id="label">#8</td>
+                <td><input type="radio" name="entry.381025579" value="1East" data-region="East" data-seed="8" required> 1East</td>
+                <td><input type="radio" name="entry.381025579" value="1Midwest" data-region="Midwest" data-seed="8"> 1Midwest</td>
+                <td><input type="radio" name="entry.381025579" value="1South" data-region="South" data-seed="8"> 1South</td>
+                <td><input type="radio" name="entry.381025579" value="1West" data-region="West" data-seed="8"> 1West</td>
+            </tr>
+            <tr>
+                <td id="label">#9</td>
+                <td><input type="radio" name="entry.436560297" value="1East" data-region="East" data-seed="9" required> 1East</td>
+                <td><input type="radio" name="entry.436560297" value="1Midwest" data-region="Midwest" data-seed="9"> 1Midwest</td>
+                <td><input type="radio" name="entry.436560297" value="1South" data-region="South" data-seed="9"> 1South</td>
+                <td><input type="radio" name="entry.436560297" value="1West" data-region="West" data-seed="9"> 1West</td>
+            </tr>
+            <tr>
+                <td id="label">#10</td>
+                <td><input type="radio" name="entry.315486274" value="1East" data-region="East" data-seed="10" required> 1East</td>
+                <td><input type="radio" name="entry.315486274" value="1Midwest" data-region="Midwest" data-seed="10"> 1Midwest</td>
+                <td><input type="radio" name="entry.315486274" value="1South" data-region="South" data-seed="10"> 1South</td>
+                <td><input type="radio" name="entry.315486274" value="1West" data-region="West" data-seed="10"> 1West</td>
+            </tr>
+            <tr>
+                <td id="label">#11</td>
+                <td><input type="radio" name="entry.2105076289" value="1East" data-region="East" data-seed="11" required> 1East</td>
+                <td><input type="radio" name="entry.2105076289" value="1Midwest" data-region="Midwest" data-seed="11"> 1Midwest</td>
+                <td><input type="radio" name="entry.2105076289" value="1South" data-region="South" data-seed="11"> 1South</td>
+                <td><input type="radio" name="entry.2105076289" value="1West" data-region="West" data-seed="11"> 1West</td>
+            </tr>
+            <tr>
+                <td id="label">#12</td>
+                <td><input type="radio" name="entry.609072613" value="1East" data-region="East" data-seed="12" required> 1East</td>
+                <td><input type="radio" name="entry.609072613" value="1Midwest" data-region="Midwest" data-seed="12"> 1Midwest</td>
+                <td><input type="radio" name="entry.609072613" value="1South" data-region="South" data-seed="12"> 1South</td>
+                <td><input type="radio" name="entry.609072613" value="1West" data-region="West" data-seed="12"> 1West</td>
+            </tr>
+            <tr>
+                <td id="label">#13</td>
+                <td><input type="radio" name="entry.78433470" value="1East" data-region="East" data-seed="13" required> 1East</td>
+                <td><input type="radio" name="entry.78433470" value="1Midwest" data-region="Midwest" data-seed="13"> 1Midwest</td>
+                <td><input type="radio" name="entry.78433470" value="1South" data-region="South" data-seed="13"> 1South</td>
+                <td><input type="radio" name="entry.78433470" value="1West" data-region="West" data-seed="13"> 1West</td>
+            </tr>
+            <tr>
+                <td id="label">#14</td>
+                <td><input type="radio" name="entry.925924376" value="1East" data-region="East" data-seed="14" required> 1East</td>
+                <td><input type="radio" name="entry.925924376" value="1Midwest" data-region="Midwest" data-seed="14"> 1Midwest</td>
+                <td><input type="radio" name="entry.925924376" value="1South" data-region="South" data-seed="14"> 1South</td>
+                <td><input type="radio" name="entry.925924376" value="1West" data-region="West" data-seed="14"> 1West</td>
+            </tr>
+            <tr>
+                <td id="label">#15</td>
+                <td><input type="radio" name="entry.941622385" value="1East" data-region="East" data-seed="15" required> 1East</td>
+                <td><input type="radio" name="entry.941622385" value="1Midwest" data-region="Midwest" data-seed="15"> 1Midwest</td>
+                <td><input type="radio" name="entry.941622385" value="1South" data-region="South" data-seed="15"> 1South</td>
+                <td><input type="radio" name="entry.941622385" value="1West" data-region="West" data-seed="15"> 1West</td>
+            </tr>
+            <tr>
+                <td id="label">#16</td>
+                <td><input type="radio" name="entry.1416148783" value="1East" data-region="East" data-seed="16" required> 1East</td>
+                <td><input type="radio" name="entry.1416148783" value="1Midwest" data-region="Midwest" data-seed="16"> 1Midwest</td>
+                <td><input type="radio" name="entry.1416148783" value="1South" data-region="South" data-seed="16"> 1South</td>
+                <td><input type="radio" name="entry.1416148783" value="1West" data-region="West" data-seed="16"> 1West</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <input type="submit" value="Submit">
+
+</form>
+
+<script>
+    // Insert teams here in order of seed
+    const regionTeams = {
+        East: [
+            "UConn", "Duke", "Georgia", "Bama",
+            "Villanova", "Marquette", "Seton Hall", "Creighton",
+            "Xavier", "Providence", "St. John's", "Butler",
+            "DePaul", "Georgetown", "Nova", "St. Joe's"
+        ],
+        Midwest: [
+            "Kansas", "Michigan", "Ohio State", "Wisconsin",
+            "Illinois", "Purdue", "Indiana", "Iowa",
+            "Nebraska", "Minnesota", "Northwestern", "Maryland",
+            "Rutgers", "Michigan State", "Kent State", "Toledo"
+        ],
+        South: [
+            "Florida", "Tennessee", "Kentucky", "Auburn",
+            "Texas", "Oklahoma", "Baylor", "Kansas State",
+            "TCU", "SMU", "Houston", "UAB",
+            "Memphis", "Louisville", "Vanderbilt", "Mississippi State"
+        ],
+        West: [
+            "UCLA", "Arizona", "USC", "Oregon",
+            "Stanford", "California", "Washington", "Oregon State",
+            "Utah", "Colorado", "Arizona State", "Nevada",
+            "San Diego State", "UNLV", "BYU", "Gonzaga"
+        ]
+    };
+
+    document.addEventListener("DOMContentLoaded", function() {
+        function populateTableWithTeams() {
+            const table = document.getElementById('teamsTable');
+            
+            if (!table) {
+                console.error('Table with id "teamsTable" not found.');
+                return;
+            }
+            
+            const rows = Array.from(table.querySelectorAll('tr')).slice(1);
+
+            const regions = ['East', 'Midwest', 'South', 'West'];
+
+            // Access the arrays from the object
+            const eastArray = regionTeams['East'];
+            const midwestArray = regionTeams['Midwest'];
+            const southArray = regionTeams['South'];
+            const westArray = regionTeams['West'];
+
+            // Ensure you don't exceed the array bounds
+            const maxTeams = Math.min(eastArray.length, midwestArray.length, southArray.length, westArray.length);
+
+            // Iterate through each row
+            rows.forEach((row, rowIndex) => {
+                const cells = Array.from(row.querySelectorAll('td')).slice(1);
+
+                if (cells.length >= regions.length) {
+                    if (rowIndex < maxTeams) {
+                        // Fill cells with corresponding teams
+                        const teamValues = [
+                            eastArray[rowIndex],
+                            midwestArray[rowIndex],
+                            southArray[rowIndex],
+                            westArray[rowIndex]
+                        ];
+
+                        cells.forEach((cell, cellIndex) => {
+                            const radios = cell.querySelectorAll('input[type="radio"]');
+                            radios.forEach((radio, radioIndex) => {
+                                if (radioIndex === 0) {
+                                    radio.value = teamValues[cellIndex];
+                                    
+                                    // Update the label text next to the radio button
+                                    const label = cell.querySelector('label');
+                                    if (label) {
+                                        label.textContent = teamValues[cellIndex];
+                                    } else {
+                                        // If there's no <label>, update the text node directly
+                                        const textNode = cell.childNodes[1];
+                                        if (textNode && textNode.nodeType === Node.TEXT_NODE) {
+                                            textNode.textContent = teamValues[cellIndex];
+                                        }
+                                    }
+                                }
+                            });
+                        });
+                    }
+                }
+            });
+        }
+
+        populateTableWithTeams();
+    });
+    
+    function validateForm() {
+        var errorMessage = document.getElementById("errorMessage");
+        errorMessage.innerHTML = "";
+
+        var name = document.getElementById("name").value;
+        var email = document.getElementById("email").value;
+        var phone = document.getElementById("phone").value;
+
+        if (name === "") {
+            errorMessage.innerHTML += "Name is required.<br>";
+        }
+        if (email === "") {
+            errorMessage.innerHTML += "Email is required.<br>";
+        } else if (!validateEmail(email)) {
+            errorMessage.innerHTML += "Invalid email format.<br>";
+        }
+        if (phone === "") {
+            errorMessage.innerHTML += "Phone is required.<br>";
+        } else if (!validatePhone(phone)) {
+            errorMessage.innerHTML += "Invalid phone format.<br>";
+        }
+
+        var regionalErrors = validateRegionalSelections()
+        if (regionalErrors.length > 0) {
+            errorMessage.innerHTML += "You must select 3, 4, or 5 teams from each region.<br>" + regionalErrors.join("<br>") + "<br>";
+        }
+
+        var seedSumErrors = validateSeedSums();
+        if (seedSumErrors.length > 0) {
+            errorMessage.innerHTML += "Invalid team selections:<br>" + seedSumErrors.join("<br>") + "<br>";
+        }
+
+        if (errorMessage.innerHTML !== "") {
+            scrollToForm(); // Scroll to the top of the form
+            return false;
+        }
+
+        // Collect radio button selections and add them to the form data
+        var formData = new FormData(document.getElementById('submissionForm'));
+        var tableSelections = getTableSelections();
+        formData.append('tableSelections', JSON.stringify(tableSelections));
+
+        // Convert FormData to a query string (optional for debugging purposes)
+        var queryString = new URLSearchParams(formData).toString();
+        console.log("Form data:", queryString);
+
+        alert("Form submitted successfully!");
+        return true;
+    }
+
+    function validateEmail(email) {
+        var re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    }
+
+    function validatePhone(phone) {
+        var re = /^\d{10}$/;  // This regex validates a 10-digit phone number
+        return re.test(phone);
+    }
+
+    function validateRegionalSelections() {
+        var regions = ["East", "West", "Midwest", "South"];
+        var valid = true;
+        var errors = [];
+
+        regions.forEach(function(region) {
+            var checkboxes = document.querySelectorAll(`input[data-region="${region}"]`);
+            var selectedCount = Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
+            if (selectedCount !== 3 && selectedCount !== 4 && selectedCount !== 5) {
+                valid = false;
+                errors.push(`In ${region}, you have selected ${selectedCount} teams.`);
+            }
+        });
+
+        return errors;
+    }
+
+    function validateSeedSums() {
+        var regions = ["East", "West", "Midwest", "South"];
+        var errors = [];
+
+        regions.forEach(function(region) {
+            var checkedTeams = Array.from(document.querySelectorAll(`input[data-region="${region}"]:checked`));
+            var seeds = {};
+            checkedTeams.forEach(function(team) {
+                var seed = parseInt(team.getAttribute('data-seed'));
+                var name = team.value;
+                if (!seeds[seed]) {
+                    seeds[seed] = [];
+                }
+                seeds[seed].push(name);
+            });
+
+            var seedsArray = Object.keys(seeds).map(Number);
+            for (var i = 0; i < seedsArray.length; i++) {
+                for (var j = i + 1; j < seedsArray.length; j++) {
+                    if (seedsArray[i] + seedsArray[j] === 17) {
+                        errors.push(`In ${region}, the teams with seeds ${seedsArray[i]} (${seeds[seedsArray[i]].join(", ")}) and ${seedsArray[j]} (${seeds[seedsArray[j]].join(", ")}) play in Round 1.`);
+                    }
+                }
+            }
+        });
+
+        return errors;
+    }
+
+    function getTableSelections() {
+        var selections = {};
+        for (var i = 1; i <= 16; i++) {
+            var radios = document.getElementsByName('seed' + i);
+            for (var j = 0; j < radios.length; j++) {
+                if (radios[j].checked) {
+                    selections['seed' + i] = radios[j].value;
+                }
+            }
+        }
+        return selections;
+    }
+
+    function scrollToForm() {
+        var form = document.getElementById("submissionForm");
+        form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+</script>
+
+</body>
+</html>
